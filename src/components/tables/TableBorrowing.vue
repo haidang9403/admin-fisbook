@@ -58,7 +58,7 @@ onUpdated(() => {
         <table v-if="data.length !== 0" class="w-full text-sm text-left rtl:text-right text-gray-700">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                 <tr class="p-4 border">
-                    <th scope="col" class="px-6 py-3">Tài khoản</th>
+                    <th v-if="data[0].user_id.username" scope="col" class="px-6 py-3">Tài khoản</th>
                     <th scope="col" class="px-6 py-3">Tên sách</th>
                     <th scope="col" class="px-6 py-3">Ảnh </th>
                     <th scope="col" class="px-6 py-3">Ngày mượn</th>
@@ -75,7 +75,7 @@ onUpdated(() => {
                     :key="item._id"
                     class="bg-white border hover:bg-gray-50 "
                 >
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ item.user_id?.username }}</th>
+                    <th v-if="item.user_id.username" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ item.user_id?.username }}</th>
                     <td class="px-6 py-4 max-w-[200px] truncate">{{ item.book_id?.title }}</td>
                     <td class="px-6 py-4">
                         <img :src="item.book_id?.img" class="size-[60px]" :alt="item.book_id?.title">
@@ -135,7 +135,12 @@ onUpdated(() => {
             </tbody>
         </table>
         <div v-else>
-            Chưa có đơn mượn nào cần duyệt
+            <div class="h-[400px] bg-white">
+                <p class="text-3xl font-bold flex items-center justify-center h-full gap-2 text-amber-500">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                    Chưa có đơn nào!
+                </p>
+            </div>
         </div>
     </div>
     

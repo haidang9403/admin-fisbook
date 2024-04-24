@@ -1,6 +1,6 @@
 <script setup>
 import Tabs from '@/components/Tabs.vue';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -36,7 +36,9 @@ const tabs = computed( () => {
     ]
 })
 
-
+onMounted(() => {
+    document.title = "Đơn mượn"
+})
 </script>
 
 <template>

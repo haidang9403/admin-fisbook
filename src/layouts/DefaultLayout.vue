@@ -5,10 +5,10 @@ import Sidebar from "@/components/SideBar.vue";
 
 <template>
     <div class="grid grid-cols-12 gap-3 min-h-screen w-full">
-        <Sidebar class="col-span-2 h-full" />
-        <div class="col-span-10 h-full flex flex-col">
+        <Sidebar class="col-span-2"/>
+        <div class="col-span-10 col-start-3 h-screen flex flex-col">
             <Header />
-            <div class="p-6 -ml-3 bg-[#f5f6fa] flex flex-col gap-3 grow">
+            <div class="p-6 -ml-3 bg-[#f5f6fa] flex flex-col gap-3 grow overflow-y-auto h-full">
                 <slot>
                     
                 </slot>

@@ -51,7 +51,6 @@ class BookService {
             store.getters.getAccessToken
         )
 
-        console.log(store)
 
         return (await this.apiJwt.put(`/book/${id}`, data)).data;
     }
@@ -67,6 +66,39 @@ class BookService {
         )
 
         return (await this.apiJwt.delete(`/book/${id}`)).data;
+    }
+
+    async addAuthor(data) {
+        this.apiJwt = createApiJwt(this.baseURL,
+            {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }, store.getters.getAccessToken
+        )
+
+        return (await this.apiJwt.post("/author", data)).data;
+    }
+
+    async addCategory(data) {
+        this.apiJwt = createApiJwt(this.baseURL,
+            {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }, store.getters.getAccessToken
+        )
+
+        return (await this.apiJwt.post("/category", data)).data;
+    }
+
+    async addPublisher(data) {
+        this.apiJwt = createApiJwt(this.baseURL,
+            {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }, store.getters.getAccessToken
+        )
+
+        return (await this.apiJwt.post("/publisher", data)).data;
     }
 }
 

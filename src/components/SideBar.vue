@@ -1,35 +1,42 @@
 <script setup>
 import SideBarItem from '@/components/SideBarItem.vue';
-import { watch, ref, onMounted } from 'vue';
+import { watch, ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-const sidebarContent = ref([
+const sidebarContent = computed( () => [
     {
         icon: "fa-solid fa-house",
         content: "Trang chủ",
         path: "/",
-        current: false,
+        current: simplifyPath(route.path) === "/",
     },
     {
         icon: "fa-solid fa-table-cells-large",
-        content: "Sản phẩm",
+        content: "Sách",
         path: "/product",
-        current: false,
+        current: simplifyPath(route.path) === "/product",
     },
     {
         icon: "fa-solid fa-list-check",
         content: "Đơn mượn",
         path: "/borrowing",
-        current: false
+        current: simplifyPath(route.path) === "/borrowing"
     },
     {
         icon: "fa-solid fa-user",
-        content: "Người dùng",
+        content: "Khách hàng",
         path: "/user",
-        current: false
+        current: simplifyPath(route.path) === "/user"
     },
+    {
+        icon: "fa-solid fa-user-tie",
+        content: "Thành viên",
+        path: "/admin",
+        current: simplifyPath(route.path) === "/admin",
+        divide: true
+    }
 ]) 
 
 function simplifyPath(path) {
@@ -47,38 +54,22 @@ function simplifyPath(path) {
 
     return simplifiedPath;
 }
-
-
-const handleSideBarClick = () => {
-    sidebarContent.value.forEach((item) => {
-        item.current = simplifyPath(route.path) === item.path
-    })
-}
-
-watch(() => route.path, (newValue, oldValue) => {
-  sidebarContent.value.forEach((item) => {
-    item.current = item.path === simplifyPath(newValue);
-  });
-});
-
-onMounted(() => {
-  sidebarContent.value.forEach((item) => {
-    item.current = item.path === simplifyPath(route.path);
-  });
-});
 </script>
 
 <template >
-    <div class=" min-h-screen flex flex-col">
-        <div class="h-[70px] grid place-items-center font-extrabold text-lg">
-            LOGO HERE
-        </div>
-        <div class="grow flex flex-col items-center border-r border-[e0e0e0] h-fit">
+    <div class=" h-screen flex flex-col">
+        <router-link to="/" class="h-[70px] grid place-items-center font-extrabold text-lg">
+            <h2 class="text-3xl font-extraboldbold text-center flex gap-0 items-end">
+                Fisb
+                <i class="fa-solid fa-fish" style="color: #74C0FC;"></i>
+                k
+            </h2>
+        </router-link>
+        <div class="grow flex flex-col items-center border-r border-[e0e0e0] h-full">
             <SideBarItem 
                 v-for="(item,index) in sidebarContent" 
                 :key="index" 
                 :item="item"
-                @click="handleSideBarClick()"
             />
         </div>
     </div>

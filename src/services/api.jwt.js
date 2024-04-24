@@ -9,7 +9,7 @@ export default (baseURL, header, token) => {
         baseURL,
         headers: {
             ...header,
-            'Authorization': `Bearer ${token}`
+            'authorization': `Bearer ${token}`
         }
     });
 
@@ -26,7 +26,7 @@ export default (baseURL, header, token) => {
             };
 
             store.commit('LOGIN_SUCCESS', refreshUser);
-            config.headers['Authorization'] = "Bearer " + data.accessToken;
+            config.headers['authorization'] = "Bearer " + data.accessToken;
         }
 
         return config;

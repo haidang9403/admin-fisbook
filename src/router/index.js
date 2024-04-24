@@ -11,6 +11,8 @@ import Borrowing from '@/views/Borrowing.vue'
 import User from '@/views/User.vue'
 
 import authService from '@/services/auth.service';
+import Admin from '@/views/Admin.vue'
+import NotFound from '@/views/NotFound.vue'
 
 
 const routes = [
@@ -82,7 +84,42 @@ const routes = [
   {
     path: "/user",
     component: User,
-    name: "user"
+    name: "user",
+    children: [
+      {
+        path: "",
+        component: () => import('@/components/UserView.vue'),
+        name: "view user"
+      },
+      {
+        path: ":id",
+        component: () => import('@/components/DetailUser.vue'),
+        name: "detail user"
+      }
+    ]
+  },
+  {
+    path: "/admin",
+    component: Admin,
+    name: "admin",
+    children: [
+      {
+        path: "",
+        component: () => import('@/components/admins/AdminView.vue'),
+        name: "view admin"
+      },
+      {
+        path: "add",
+        component: () => import('@/components/admins/AdminAdd.vue'),
+        name: "add admin"
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
+    meta: { layout: AuthLayout }
   }
 ]
 

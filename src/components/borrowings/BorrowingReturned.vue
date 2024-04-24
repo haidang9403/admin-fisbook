@@ -42,8 +42,8 @@ const fetchData = async () => {
     try {
         const data = await borrowingService.getAll({status: "Đã trả"});
         data.sort((a, b) => {
-            const dateA = new Date(a.updatedAt);
-            const dateB = new Date(b.updatedAt);
+            const dateA = new Date(a.borrow_at);
+            const dateB = new Date(b.borrow_at);
             return dateB - dateA; // Sắp xếp từ mới đến cũ
         });
         totalProduct.value = data;

@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-6">
+    <div class="mb-6 relative">
         <label 
             :for="id"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -33,7 +33,7 @@
             }"
             :placeholder="placeholder"
         />
-        <p v-if="errors[id]" class="mt-2 text-sm text-red-600">{{ errors[id] }}</p>
+        <p v-if="errors[id]" class="mt-2 text-sm text-red-600 absolute top-full">{{ errors[id] }}</p>
     </div>
 </template>
 

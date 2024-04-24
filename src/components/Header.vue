@@ -5,11 +5,24 @@ import InputSearch from './inputs/InputSearch.vue';
 import ButtonCircle from './buttons/ButtonCircle.vue'
 import { useStore } from 'vuex';
 import { initDropdowns } from 'flowbite';
+import adminService from '@/services/admin.service';
 
 const store = useStore();
 const router = useRouter();
 
 const user = computed(() => store.state.auth.user)
+const currentUser = ref({})
+
+const fetchData = async () => {
+    try{
+        currentUser.value = await adminService.getDetails(user.value._id)
+        namePosition = currentUser.value.position == 0 ? 'Quản lý' : 'Nhân viên'
+    } catch(e) {
+
+    }
+}
+
+let namePosition = currentUser.value.position == 0 ? 'Quản lý' : 'Nhân viên'
 
 const logOut = async () => {
     try{
@@ -26,19 +39,20 @@ const logOut = async () => {
 
 onMounted(() => {
     initDropdowns();
+    fetchData()
 })
 
 </script>
 
 <template>
-    <div class="flex items-center justify-between h-[70px]">
+    <div class="flex items-center justify-between h-[70px] -ml-3">
         <InputSearch/>
         <div class="flex gap-6 items-center  pr-[50px]">
             <div class="flex gap-3">
                 <img src="/images/9720009.jpg" class="size-[44px] rounded-full" alt="">
                 <div class="grid place-content-center">
-                    <h4 class="font-bold text-sm">{{ user?.fullname }}</h4>
-                    <p class="font-light text-xs">{{  user?.position || "Quản lý" }}</p>
+                    <h4 class="font-bold text-sm">{{ currentUser?.fullname }}</h4>
+                    <p class="font-light text-xs">{{  namePosition }}</p>
                 </div>
             </div>
             <ButtonCircle

@@ -8,7 +8,7 @@ const props = defineProps({
     image: String
 })
 
-const emit = defineEmits(['inputFile'])
+const emit = defineEmits(['inputFile', 'inFocus'])
 
 const image = ref(null);
 
@@ -45,10 +45,11 @@ const removeImage = () => {
 
 
 <template>
-    <div class="flex flex-col items-center w-full mb-6">
+    <div class="flex flex-col items-center w-full mb-6 relative">
         <div class="flex items-center justify-center w-1/2 mb-6">
             <label 
                 for="dropzone-file" 
+                @click="emit('inFocus')"
                 class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 "
                 :class="{
                     'bg-gray-100 opacity-80 cursor-not-allowed': disabled,
@@ -75,6 +76,6 @@ const removeImage = () => {
             </div>
             <img :src="image.url" class="w-full object-cover" />
         </div>
-        <p v-if="errors[id]" class="mt-2 text-sm text-red-600">{{ errors[id] }}</p>
+        <p v-if="errors[id]" class="mt-2 text-sm text-red-600 absolute top-full">{{ errors[id] }}</p>
     </div>
 </template>
