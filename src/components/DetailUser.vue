@@ -100,7 +100,7 @@ onMounted(() => {
                 </div>
                 <div>
                     <i class="fa-solid fa-person-half-dress mr-2"></i>
-                    Giới tính: <strong>{{ user.gender || 'Chưa cập nhật' }}</strong>
+                    Giới tính: <strong>{{ (user.gender == 1 ? 'Nam' : (user.gender == 2 ? 'Nữ' : 'Khác')) || 'Chưa cập nhật' }}</strong>
                 </div>
                 <div>
                     <i class="fa-solid fa-location-dot mr-2"></i>
